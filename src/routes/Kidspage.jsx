@@ -3,7 +3,7 @@ import axios from "axios";
 import { SidebarContext } from "../context/SidebarContextProvider";
 import Sidebar from "../components/Sidebar";
 import SidebarLarge from '../components/SidebarLarge';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Box,
   Image,
@@ -15,7 +15,8 @@ import {
   HStack
 } from "@chakra-ui/react";
 
-const Women = () => {
+const Women = ({check}) => {
+  const navigate = useNavigate();
   const { cartData, setCartData,cartLength,setCartLength,category,setCategory, minPrice, maxPrice, maxDiscount, minDiscount } = React.useContext(SidebarContext);
    
   const [data, setData] = React.useState([]);
@@ -46,17 +47,33 @@ const Women = () => {
   };
 
   const handleAddToCart = async (id) => {
-    let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
-      quantity: 1,
-    });
-    setCartLength((prev) => prev + 1);
+    if(check)
+    {
+     let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
+       quantity: 1,
+     });
+     setCartLength((prev) => prev + 1);
+    }
+    else
+    {
+     alert("Please Login")
+     navigate("/login");
+    }
   };
 
   const handleRemoveFromCart = async (id) => {
-    let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
-      quantity: 0,
-    });
-    setCartLength((prev) => prev - 1);
+    if(check)
+    {
+     let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
+       quantity: 0,
+     });
+     setCartLength((prev) => prev - 1);
+    }
+    else
+    {
+     alert("Please Login")
+     navigate("/login");
+    }
   };
 
   const handleClick = (id) => {

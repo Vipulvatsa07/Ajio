@@ -16,7 +16,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { SidebarContext } from '../context/SidebarContextProvider';
   
-  export default function SimpleCard() {
+  export default function SimpleCard({setCheck,check}) {
+
       const{login,setLogin} = useContext(SidebarContext);
       const [username, setUsername] = useState('');
       const [password, setPassword] = useState('');
@@ -25,7 +26,8 @@ import { SidebarContext } from '../context/SidebarContextProvider';
       const navigate = useNavigate();
   
       const handleLogin = () => {
-
+        
+        
 
 
         
@@ -36,6 +38,8 @@ import { SidebarContext } from '../context/SidebarContextProvider';
             alert("Login succesfull")
               navigate("/");
               setLogin(true);
+              setCheck(true)
+              console.log(check)
   
           } else {
               setError("Invalid username or password");

@@ -1,7 +1,7 @@
 import { Box, Flex, Image, Text, Button, useMediaQuery } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../components/Footer";
 import styled from "styled-components";
 import "./SingleUserPage.css";
@@ -29,8 +29,8 @@ const SingleProductImage = styled(Image)`
     width: 100%;
   }
 `;
-const SingleUserPage = () => {
-
+const SingleUserPage = ({check}) => {
+  const navigate = useNavigate();
   const { cartLength,setCartLength } = React.useContext(SidebarContext);
 
   const [product, setProduct] = useState({});
@@ -53,17 +53,33 @@ const SingleUserPage = () => {
     });
   };
   const handleAddToCart = async (id) => {
-    let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
-      quantity: 1,
-    });
-    setCartLength((prev) => prev + 1);
+    if(check)
+       {
+        let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
+          quantity: 1,
+        });
+        setCartLength((prev) => prev + 1);
+       }
+       else
+       {
+        alert("Please Login")
+        navigate("/login");
+       }
   };
 
   const handleRemoveFromCart = async (id) => {
-    let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
-      quantity: 0,
-    });
-    setCartLength((prev) => prev - 1);
+    if(check)
+    {
+     let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
+       quantity: 0,
+     });
+     setCartLength((prev) => prev - 1);
+    }
+    else
+    {
+     alert("Please Login")
+     navigate("/login");
+    }
   };
 
   const handleClick = (id) => {

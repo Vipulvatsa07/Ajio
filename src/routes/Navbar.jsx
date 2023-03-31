@@ -6,7 +6,7 @@ import Menuitem from "../components/MenuItem";
 import { Link } from "react-router-dom";
 import { SidebarContext } from "../context/SidebarContextProvider";
 import { useNavigate } from "react-router-dom";
-const Navbar = () => {
+const Navbar = ({setCheck}) => {
 
   let user = JSON.parse(localStorage.getItem("user"));
   let loginValue = JSON.parse(localStorage.getItem("loginValue"));
@@ -22,6 +22,7 @@ const Navbar = () => {
 
       localStorage.removeItem("loginValue");
       localStorage.removeItem("user");
+      setCheck(false)
       navigate('/login')
          
     }

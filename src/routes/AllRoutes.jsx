@@ -10,26 +10,26 @@ import Login from './Login';
 import SingleUserPage from './SingleUserPage';
 import Cart from './Cart';
 import Querypage from './Querypage';
-const AllRoutes = () => {
+const AllRoutes = ({setCheck,check}) => {
   return (
     <div>
         <Box marginTop={'90px'} >
         <Routes>
           <Route path='/' element={<HomePage />}></Route>
-            <Route path='/women' element={<Women />} />
-            <Route path='/men' element={<MenPage />} />
-            <Route path="/kids" element={<Kidspage />}></Route>
+            <Route path='/women' element={<Women check={check}/>} />
+            <Route path='/men' element={<MenPage  check={check}/>} />
+            <Route path="/kids" element={<Kidspage check={check}/>}></Route>
 
             
-            <Route path='/cart' element={<Cart />}/>
+            <Route path='/cart' element={<Cart  check={check}/>}/>
 
-            <Route path='/signup' element={<Signup/>}/>
-            <Route path='/login' element={<Login/>}/>
+            <Route path='/signup' element={<Signup />}/>
+            <Route path='/login' element={<Login setCheck={setCheck} check={check}/>}/>
 
-            <Route path='/men/:id' element={<SingleUserPage/>} />
+            <Route path='/men/:id' element={<SingleUserPage check={check}/>} />
             <Route path='/querypage/:value' element={<Querypage />}></Route>
-            <Route path='/women/:id' element={<SingleUserPage/>} />
-            <Route path='/kids/:id' element={<SingleUserPage/>} />
+            <Route path='/women/:id' element={<SingleUserPage check={check}/>} />
+            <Route path='/kids/:id' element={<SingleUserPage check={check}/>} />
         </Routes>
         </Box>
       

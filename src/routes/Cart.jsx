@@ -5,7 +5,7 @@ import { SidebarContext } from "../context/SidebarContextProvider";
 import { useMediaQuery } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-const Cart = () => {
+const Cart = ({check}) => {
   const [newCart,setNewCart]=useState([])
   const [showAlert, setShowAlert] = useState(false);
 
@@ -148,7 +148,7 @@ const Cart = () => {
           My Bag ({cartLength} items){" "}
         </Text>
         <Box>
-          {cartData.map((elem) => {
+          {check&&cartData.map((elem) => {
             return (
               <Box
                 key={elem.id}
