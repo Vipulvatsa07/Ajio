@@ -75,11 +75,12 @@ const SingleUserPage = () => {
     ApiFetch(id);
   }, [id, cartLength]);
   // const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
+  const [isLargerThan900] = useMediaQuery("(min-width: 900px)");
   return (
     <Box>
-      <Container>
-        <Box display="flex" gap="80px" marginTop="10px">
-          <SingleProductContainer>
+      <Container id="singlecontain">
+        <Box id="topImage"  gap="80px" marginTop="10px">
+          <SingleProductContainer id="singlesmall">
             <SingleProductImage
               className="singleImage"
               width="70px"
@@ -121,19 +122,11 @@ const SingleUserPage = () => {
               marginTop="10px"
             />
           </SingleProductContainer>
-          {/* <Box
-          className="thirdRow"
-            style={{
-              display: "grid",
-              gap: "50px",
-              gridTemplateColumns: "repeat(2,1fr)"
-              
-            }}
-          > */}
+        
             {/* ///////// ///////////////*/}
             <Box style={{ width: "400px" }}>
               <Box style={{display:"flex"}}><Box>
-            <ChevronLeftIcon boxSize={6}  mt="200px" mr="5px"/>
+            <ChevronLeftIcon class="lefticon" boxSize={6}  mt="200px" mr="5px"/>
             </Box>
             <Box>
               <SingleProductImage
@@ -145,7 +138,7 @@ const SingleUserPage = () => {
               />
               </Box>
               <Box>
-              <ChevronRightIcon mt="200px" boxSize={6}   ml="5px"/>
+              <ChevronRightIcon class="lefticon" mt="200px" boxSize={6}   ml="5px"/>
               </Box>
               </Box>
               <Box style={{ display: "flex", marginTop: "30px" ,marginLeft:"28px" }}>
@@ -176,7 +169,7 @@ const SingleUserPage = () => {
             </Box>
             {/* ///////////////////////// */}
 
-            <Box className="thirdRow">
+            <Box  className="thirdRow">
               <Box gap="10px">
                 <Text
                   mt="5px"
