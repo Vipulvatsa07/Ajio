@@ -57,7 +57,7 @@ const Cart = () => {
       setTimeout(() => {
         navigate("/");
       
-      }, 3000);
+      }, 4000);
       setTimeout(()=>{
         getCartItems()
       })
@@ -234,7 +234,7 @@ const Cart = () => {
           
         </Box>
       </Box>
-      <Box width={isLargerThan900 ? "25%" : "90%"} >
+      <Box width={isLargerThan900 ? "25%" : "100%"} >
         <Box
           bg="#fafafa"
           height={"fit-content"}

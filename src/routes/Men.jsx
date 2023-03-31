@@ -54,10 +54,13 @@ const Women = () => {
   };
 
   const handleAddToCart = async (id) => {
-    let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
-      quantity: 1,
-    });
-    setCartLength((prev) => prev + 1);
+  
+      let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
+        quantity: 1,
+      });
+      setCartLength((prev) => prev + 1);
+    
+  
   };
 
   const handleRemoveFromCart = async (id) => {

@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text, Button } from "@chakra-ui/react";
+import { Box, Flex, Image, Text, Button, useMediaQuery } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -74,6 +74,7 @@ const SingleUserPage = () => {
   useEffect(() => {
     ApiFetch(id);
   }, [id, cartLength]);
+  // const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
   return (
     <Box>
       <Container>
