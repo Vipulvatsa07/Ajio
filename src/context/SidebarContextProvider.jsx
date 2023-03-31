@@ -6,7 +6,7 @@ export const SidebarContext = React.createContext();
 export default function SidebarContextProvider({ children }) {
 
   const getCartItems = async () => {
-    let res = await axios.get(`https://ajio-qvwt.onrender.com/data`);
+    let res = await axios.get(`https://mockserver-rm4.onrender.com/data`);
     let data = res.data.filter((elem) => elem.quantity !== 0);
     setCartData(data);
     setCartLength(data.length);
@@ -44,6 +44,7 @@ export default function SidebarContextProvider({ children }) {
         setMinDiscount,
         maxDiscount,
         setMaxDiscount,
+        
       }}
     >
       {children}

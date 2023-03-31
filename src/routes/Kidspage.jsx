@@ -40,20 +40,20 @@ const Women = () => {
 
   const getData = async () => {
     let res = await axios.get(
-      `https://ajio-qvwt.onrender.com/data?category=${category}&offer_prices_gte=${minPrice}&offer_prices_lte=${maxPrice}&discount_gte=${minDiscount}&discount_lte=${maxDiscount}`
+      `https://mockserver-rm4.onrender.com/data?category=${category}&offer_prices_gte=${minPrice}&offer_prices_lte=${maxPrice}&discount_gte=${minDiscount}&discount_lte=${maxDiscount}`
     );
     setData(res.data);
   };
 
   const handleAddToCart = async (id) => {
-    let res = await axios.patch(`https://ajio-qvwt.onrender.com/data/${id}`, {
+    let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
       quantity: 1,
     });
     setCartLength((prev) => prev + 1);
   };
 
   const handleRemoveFromCart = async (id) => {
-    let res = await axios.patch(`https://ajio-qvwt.onrender.com/data/${id}`, {
+    let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
       quantity: 0,
     });
     setCartLength((prev) => prev - 1);

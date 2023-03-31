@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { Box, Text, Grid, Image, Button } from "@chakra-ui/react";
+import { Box, Text, Grid, Image, Button, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
 import { SidebarContext } from "../context/SidebarContextProvider";
 import { useMediaQuery } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+  const [newCart,setNewCart]=useState([])
+  const [showAlert, setShowAlert] = useState(false);
+
+
+  const getNewCartData= async()=>{
+      let res=await axios.get(`https://mockserver-rm4.onrender.com/data`)
+      let data = res.data.filter((elem) => elem.quantity !== 0);
+      // console.log(res.data)
+        setNewCart(data)
+        console.log(newCart,"newcart")
+  }
+
   const {
     getCartItems,
     cartData,
@@ -23,26 +35,59 @@ const Cart = () => {
   const [total, setTotal] = React.useState(0);
   const [totalActual, setTotalActual] = React.useState(0);
 
-  const handleShipping = () => {
-    alert("Your order has been placed!")
-    navigate("/");
+  const handleShipping = async (cartData) => {
+    // alert("Your order has been placed!");
+    // setShowAlert(showAlert?false:true)
+    if(cartLength)
+    {
+      console.log(cartData.length)
+      setShowAlert(true);
+      for (const ele of newCart) {
+        let res = await axios.patch(
+          `https://mockserver-rm4.onrender.com/data/${ele.id}`,
+          {
+            quantity: 0,
+          }
+        );
+  
+       
+        
+      }
+  
+      setTimeout(() => {
+        navigate("/");
+      
+      }, 3000);
+      setTimeout(()=>{
+        getCartItems()
+      })
+  
+    }
+    
+ 
+    
+   
   }
 
   const handleDelete = async (id) => {
-    let res = await axios.patch(`https://ajio-qvwt.onrender.com/data/${id}`, {
+    let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
       quantity: 0,
     });
+    getCartItems()
     setCartLength((prev) => prev - 1);
+    getNewCartData()
   };
 
   const handleQuantity = async (id, quant, value) => {
     cartData.map((elem) => (elem.id === id ? (quant = quant + value) : quant));
 
-    let res = await axios.patch(`https://ajio-qvwt.onrender.com/data/${id}`, {
+    let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
       quantity: quant,
     });
+    getCartItems()
 
     calculateTotal();
+    getNewCartData()
   };
 
   const calculateTotal = () => {
@@ -64,11 +109,33 @@ const Cart = () => {
   React.useEffect(() => {
     getCartItems();
     calculateTotal();
-  }, [cartLength, cartData, total]);
+    getNewCartData()
+  }, [cartLength,total,cartData]);
 
   const [isLargerThan900] = useMediaQuery("(min-width: 900px)");
 
   return (
+    <Box>
+    {showAlert && (
+      <Alert
+        status="success"
+        variant="subtle"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+        height="200px"
+      >
+        <AlertIcon boxSize="40px" mr={0} />
+        <AlertTitle mt={4} mb={1} fontSize="lg">
+          Order Placed!
+        </AlertTitle>
+        <AlertDescription maxWidth="sm">
+          Thanks You <br />
+          Your Order will be delivered soon
+        </AlertDescription>
+      </Alert>
+    )}
     <Box
       display={isLargerThan900 ? "flex" : ""}
       width={{ base: "100%", md: "90%", "2xl": "70%" }}
@@ -91,6 +158,7 @@ const Cart = () => {
                 border={"1px solid gray"}
                 marginTop="5"
               >
+                
                 <Image src={elem.image} height={"200px"} alt={elem.name} />
                 <Box width={"300px"}>
                   <Box>
@@ -163,6 +231,7 @@ const Cart = () => {
               </Box>
             );
           })}
+          
         </Box>
       </Box>
       <Box width={isLargerThan900 ? "25%" : "90%"} >
@@ -232,6 +301,7 @@ const Cart = () => {
           </Box>
         </Box>
       </Box>
+    </Box>
     </Box>
   );
 };
