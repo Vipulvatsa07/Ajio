@@ -234,7 +234,7 @@ const Cart = ({check}) => {
           
         </Box>
       </Box>
-      <Box width={isLargerThan900 ? "25%" : "100%"} >
+      {check?<Box width={isLargerThan900 ? "25%" : "100%"} >
         <Box
           bg="#fafafa"
           height={"fit-content"}
@@ -300,7 +300,7 @@ const Cart = ({check}) => {
             </Box>
           </Box>
         </Box>
-      </Box>
+      </Box>:""}
     </Box>
     </Box>
   );
