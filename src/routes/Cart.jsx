@@ -148,7 +148,7 @@ const Cart = ({check}) => {
           My Bag ({cartLength} items){" "}
         </Text>
         <Box>
-          {check&&cartData.map((elem) => {
+          {check?cartData.map((elem) => {
             return (
               <Box
                 key={elem.id}
@@ -230,7 +230,7 @@ const Cart = ({check}) => {
                 </Box>
               </Box>
             );
-          })}
+          }):< h1 style={{fontSize:"30px",marginTop:"70px",fontWeight:"bolder"}}>PLEASE LOGIN TO PLACE ORDER</h1>}
           
         </Box>
       </Box>

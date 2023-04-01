@@ -15,7 +15,7 @@ import {
   HStack
 } from "@chakra-ui/react";
 
-const Women = ({check}) => {
+const Women = () => {
   const navigate = useNavigate();
   const { cartData, setCartData,cartLength,setCartLength,category,setCategory, minPrice, maxPrice, maxDiscount, minDiscount } = React.useContext(SidebarContext);
 
@@ -70,33 +70,27 @@ const Women = ({check}) => {
   };
 
   const handleAddToCart = async (id) => {
-    if(check)
-    {
+   
      let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
        quantity: 1,
      });
      setCartLength((prev) => prev + 1);
-    }
-    else
-    {
-     alert("Please Login")
-     navigate("/login");
-    }
+    
+    //  alert("Please Login")
+    //  navigate("/login");
+    
   };
 
   const handleRemoveFromCart = async (id) => {
-    if(check)
-    {
+  
      let res = await axios.patch(`https://mockserver-rm4.onrender.com/data/${id}`, {
        quantity: 0,
      });
      setCartLength((prev) => prev - 1);
-    }
-    else
-    {
-     alert("Please Login")
-     navigate("/login");
-    }
+   
+    //  alert("Please Login")
+    //  navigate("/login");
+    
   };
 
   const handleClick = (id) => {
