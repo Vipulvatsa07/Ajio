@@ -46,6 +46,7 @@ const Sidebar = ({firstpart,second,third,fourth,all,handleChange}) => {
         <MenuList>
           <MenuGroup title="Category">
             <RadioGroup
+            defaultValue="all"
               onChange={setCategory}
               value={category}
               marginLeft="3"

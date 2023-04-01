@@ -24,6 +24,7 @@ const SidebarLarge = ({firstpart,second,third,fourth,all,handleChange}) => {
       <Divider />
       <Text >Category</Text>
       <RadioGroup
+      defaultValue="all"
         onChange={setCategory}
         value={category}
         marginLeft="3"

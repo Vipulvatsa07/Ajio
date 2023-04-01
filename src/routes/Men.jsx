@@ -43,15 +43,33 @@ const Women = ({check}) => {
   };
 
   const getData = async () => {
-    try {
-      let res = await axios.get(
-        `https://mockserver-rm4.onrender.com/data?category=${category}&offer_prices_gte=${minPrice}&offer_prices_lte=${maxPrice}&discount_gte=${minDiscount}&discount_lte=${maxDiscount}`
-      );
-      setData(res.data);
-      // setFooter(true);
-    } catch (error) {
-      console.log(error)
+    if(category)
+    {
+      try {
+
+        let res = await axios.get(
+          `https://mockserver-rm4.onrender.com/data?category=${category}&offer_prices_gte=${minPrice}&offer_prices_lte=${maxPrice}&discount_gte=${minDiscount}&discount_lte=${maxDiscount}`
+        );
+        setData(res.data);
+        // setFooter(true);
+      } catch (error) {
+        console.log(error)
+      }
     }
+    else
+    {
+      try {
+
+        let res = await axios.get(
+          `https://mockserver-rm4.onrender.com/data?category=mens-clothing`
+        );
+        setData(res.data);
+        // setFooter(true);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    
   };
 
   const handleAddToCart = async (id) => {

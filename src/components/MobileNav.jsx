@@ -44,6 +44,7 @@ const MobileNav = () => {
           item8={"JEWELLERY"}
           item9={"INDIE"}
           item10={"STORES"}
+          value={setCategory}
         />
         <Box>
           <Link to="/">

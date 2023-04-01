@@ -12,7 +12,16 @@ import {
     Button
   } from '@chakra-ui/react'
   import {ChevronDownIcon} from "@chakra-ui/icons"
-const MobileItem = ({nameitem,item1,item2,item3,item4,item5,item6,item7,item8,item9,item10}) => {
+const MobileItem = ({nameitem,item1,item2,item3,item4,item5,item6,item7,item8,item9,item10,setCategory}) => {
+  const handlewomen=()=>{
+         setCategory("women-clothing")
+  }
+  const handlemen=()=>{
+    setCategory("mens-clothing")
+}
+const handlekid=()=>{
+  setCategory("kids-clothing")
+}
   return (
     <div style={{zIndex:"5"}}>
       <Menu>
@@ -21,9 +30,9 @@ const MobileItem = ({nameitem,item1,item2,item3,item4,item5,item6,item7,item8,it
   </MenuButton>
   <MenuList>
     <MenuItem>{item1}</MenuItem>
-    <Link to="/women"><MenuItem>{item2}</MenuItem></Link>
-    <Link to="/men"><MenuItem>{item3}</MenuItem></Link>
-    <Link to="/kids"><MenuItem>{item4}</MenuItem></Link>
+    <Link onClick={handlewomen} to="/women"><MenuItem>{item2}</MenuItem></Link>
+    <Link onClick={handlemen} to="/men"><MenuItem>{item3}</MenuItem></Link>
+    <Link onClick={handlekid} to="/kids"><MenuItem>{item4}</MenuItem></Link>
     <MenuItem>{item5}</MenuItem>
     <MenuItem>{item6}</MenuItem>
     <MenuItem>{item7}</MenuItem>
